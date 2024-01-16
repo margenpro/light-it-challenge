@@ -1,7 +1,7 @@
 export type TPatientType = {
     createdAt: string,
     name: string,
-    avatar: string,
+    avatar?: string,
     description: string,
     website: string,
     id: string,

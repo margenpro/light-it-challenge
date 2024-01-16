@@ -1,11 +1,15 @@
 import React from "react";
 
-import { ChevronUp, ChevronDown} from "react-feather";
+import {ArrowLeft, ArrowRight, ChevronUp, ChevronDown, ChevronRight, ChevronLeft} from "react-feather";
 
 
 const icons = {
+  ArrowLeft,
+  ArrowRight,
   ChevronUp,
   ChevronDown,
+  ChevronRight,
+  ChevronLeft,
 };
 
 export type IconName = keyof typeof icons;
