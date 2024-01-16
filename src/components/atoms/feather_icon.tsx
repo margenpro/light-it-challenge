@@ -1,6 +1,6 @@
 import React from "react";
 
-import {ArrowLeft, ArrowRight, ChevronUp, ChevronDown, ChevronRight, ChevronLeft} from "react-feather";
+import {ArrowLeft, ArrowRight, ChevronUp, ChevronDown, ChevronRight, ChevronLeft, Edit ,X} from "react-feather";
 
 
 const icons = {
@@ -10,6 +10,8 @@ const icons = {
   ChevronDown,
   ChevronRight,
   ChevronLeft,
+  Edit,
+  X,
 };
 
 export type IconName = keyof typeof icons;

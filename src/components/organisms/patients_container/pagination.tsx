@@ -27,7 +27,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: IP
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i);
 
   return (
-    <div className="flex flex-row w-full justify-center gap-8 h-full items-end">
+    <div className="flex ml-60 flex-row w-full gap-8 h-full items-end">
       <Button
         variant="secondary"
         size="sm"
@@ -38,7 +38,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: IP
       >
         Previous
       </Button>
-      {totalPages <= 6 ? (
+      {totalPages <= 7 ? (
         pageNumbers.map((page) => (
           <Button
             key={page}
