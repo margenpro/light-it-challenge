@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../atoms/button";
 import { TPatientType } from "../../types/patient";
 import { v4 as uuid } from "uuid";
+import { toast } from 'react-toastify';
+import { Tooltip } from "react-tooltip";
 
 interface ICreatePatientProps {
   patient?: TPatientType;
@@ -63,6 +65,7 @@ export default function CreatePatient({ patient, onClose, savePatient }: ICreate
       createdAt: patient?.createdAt ? patient?.createdAt : new Date().toLocaleString(),
     };
     savePatient(newPatient);
+    toast.success(!!!patient ? 'New patient has been added!': 'Patient has been updated!')
     onCancel();
   };
 
@@ -70,6 +73,7 @@ export default function CreatePatient({ patient, onClose, savePatient }: ICreate
     if(!!patient){
       setFormValues(initialValues)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patient])
 
   const isFormValid = !!formValues.name && !!formValues.website && !!formValues.description;
@@ -84,6 +88,7 @@ export default function CreatePatient({ patient, onClose, savePatient }: ICreate
             type="text"
             placeholder="Name"
             value={formValues.name}
+            required
             onChange={handleFormChange}
           />
         </div>
@@ -95,6 +100,7 @@ export default function CreatePatient({ patient, onClose, savePatient }: ICreate
             type="url"
             placeholder="https://www.google.com/"
             value={formValues.website}
+            required
             onChange={handleFormChange}
           />
         </div>
@@ -119,6 +125,7 @@ export default function CreatePatient({ patient, onClose, savePatient }: ICreate
             name="description"
             placeholder="Maxime tenetur eius perspiciatis minus et. Dolores rem exercitationem iure accusamus animi esse deleniti officia."
             value={formValues.description}
+            required
             onChange={handleFormChange}
           />
         </div>
@@ -126,9 +133,10 @@ export default function CreatePatient({ patient, onClose, savePatient }: ICreate
           <Button variant="secondary" onClick={onCancel}>
             Cancel
           </Button>
-          <Button variant="primary" disabled={!isFormValid} onClick={onSubmit}>
+          <Button variant="primary" disabled={!isFormValid} onClick={onSubmit} data-tooltip-id="submit-tooltip">
             {!!patient ? "Save" : "Add"}
           </Button>
+          {isFormValid ? null : <Tooltip id="submit-tooltip" content="Fill in all the required fields" className="!rounded-8" />}
         </div>
       </div>
     </div>

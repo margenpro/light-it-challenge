@@ -4,6 +4,8 @@ import { Button } from "./atoms/button";
 import CreatePatient from "./organisms/create_patient";
 import { TPatientType } from "../types/patient";
 import PatientsContainer from "./organisms/patients_container/patients_container";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function MainContainer() {
   const [patientsData, setPatientsData] = useState<TPatientType[]>(data);
@@ -35,7 +37,7 @@ export default function MainContainer() {
 
   return (
     <div className="flex flex-col h-screen w-full">
-      <div className="flex h-[5%] items-center justify-center p-4">
+      <div className="flex h-[5%] items-center justify-center pt-10 pb-6">
         <h1 className="font-semibold text-xl text-primary-00756e">Welcome to Patient Management App</h1>
       </div>
       <div className="flex overflow-hidden h-[95%] px-2 pt-4 pb-8 gap-2">
@@ -51,6 +53,7 @@ export default function MainContainer() {
           </div>
         </div>
       </div>
+      <ToastContainer position='top-right' autoClose={3000} closeOnClick pauseOnHover  />
     </div>
   );
 }
