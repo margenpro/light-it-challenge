@@ -1,23 +1,42 @@
 import React, { useEffect, useState } from "react";
-import data from "../hooks/mock.json";
 import { Button } from "./atoms/button";
 import CreatePatient from "./organisms/create_patient";
 import { TPatientType } from "../types/patient";
 import PatientsContainer from "./organisms/patients_container/patients_container";
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import LoadingSpinner from "./atoms/loading_spinner";
+import { usePatientData } from "../hooks/usePatientData";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { FeatherIcon } from "./atoms/feather_icon";
 
 export default function MainContainer() {
-  const [patientsData, setPatientsData] = useState<TPatientType[]>(data);
+  const [patientsData, setPatientsData] = useState<TPatientType[]>([]);
   const [isCreatePatientOpen, setIsCreatePatientOpen] = useState<boolean>(false);
-  const [selectedPatient, setSelectedPatient] = useState<TPatientType>()
+  const [selectedPatient, setSelectedPatient] = useState<TPatientType>();
+  const { data, loading: isPatientDataLoading, error } = usePatientData();
+
   const onOpenAddPatient = () => {
     setIsCreatePatientOpen(true);
   };
   const onCloseAddPatient = () => {
     setIsCreatePatientOpen(false);
-    setSelectedPatient(undefined)
+    setSelectedPatient(undefined);
   };
+
+  useEffect(() => {
+    if (!isPatientDataLoading && !!data && data.length > 0) {
+      setPatientsData(data);
+    }
+    if (error) {
+      toast.error(error);
+    }
+  }, [data, isPatientDataLoading, error]);
+
+  useEffect(() => {
+    if (!!selectedPatient) {
+      onOpenAddPatient();
+    }
+  }, [selectedPatient]);
 
   const savePatient = (updatedPatient: TPatientType) => {
     let updatedData = patientsData;
@@ -27,13 +46,6 @@ export default function MainContainer() {
     }
     setPatientsData(updatedData.map((patient) => (patient.id === updatedPatient.id ? updatedPatient : patient)));
   };
-
-  useEffect(() => {
-    if(!!selectedPatient){
-      onOpenAddPatient()
-    }
-  },[selectedPatient])
-
 
   return (
     <div className="flex flex-col h-screen w-full">
@@ -46,14 +58,22 @@ export default function MainContainer() {
             <Button variant="secondaryGreen" onClick={onOpenAddPatient}>
               Add new patient
             </Button>
-            {!isCreatePatientOpen ? null : <CreatePatient onClose={onCloseAddPatient} savePatient={savePatient} patient={selectedPatient} />}
+            {!isCreatePatientOpen ? null : (
+              <CreatePatient onClose={onCloseAddPatient} savePatient={savePatient} patient={selectedPatient} />
+            )}
           </div>
           <div className="flex w-4/5">
-          <PatientsContainer patientsData={patientsData} setSelectedPatient={setSelectedPatient}/>
+            {patientsData.length === 0 || isPatientDataLoading ? (
+              <div className="flex w-full justify-center items-center">
+                <LoadingSpinner size={50} className=" mr-24 mb-24" />
+              </div>
+            ) : (
+              <PatientsContainer patientsData={patientsData} setSelectedPatient={setSelectedPatient} />
+            )}
           </div>
         </div>
       </div>
-      <ToastContainer position='top-right' autoClose={3000} closeOnClick pauseOnHover  />
+      <ToastContainer position="top-right" autoClose={3000} closeOnClick pauseOnHover />
     </div>
   );
 }
