@@ -1,46 +1,59 @@
-# Getting Started with Create React App
+## Patient Management App
+This application serves as a management system for a Clinic's patients, to have a friendly UI that handles all its patient's data in one place.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project technology stack
+-  React 18
+-  Typescript
+-  Tailwind CSS
 
-## Available Scripts
+## Run the project locally
 
-In the project directory, you can run:
+First, install all dependencies:
 
-### `npm start`
+```bash
+npm install
+# or
+yarn 
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Second, run the development server:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-### `npm test`
+## Project structure
+    .
+    ├── src
+    │   ├── components
+    │   │       │──────── atoms
+    │   │       │──────── molecules
+    │   │       |──────── organisms
+    |   |       └── ... 
+    │   ├── hooks
+    │   │       │──────── usePatientData.tsx
+    │   ├── icons
+    │   │       │──────── icon_logo.tsx
+    │   │       │──────── index.tsx
+    │   │       └── ...
+    │   ├── types
+    │   │       │──────── patient.ts
+    │   ├── utils
+    │   └── ...
+    │
+    ├── node_modules
+    ├── package.json
+    ├── README.md
+    └── ...
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Architecture
 
-### `npm run build`
+Above is the general structure of the Patient Management App. This application tries to follow the "Atomic Design Pattern" ([Codeburst article](https://codeburst.io/atomic-design-with-react-e7aea8152957)). The components directory will contain basic to complex components that contributes to the main_container of the Patient Management app.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Most of the UI components are pure React-TailwindCSS built, trying to avoid using third party libraries (such us Material UI, Chakra UI, Ant Design or others). By taking this approach, we ensure that all the components are fully controlled by the development team and it is easier to match any UI designs in that way.
+Third party libraries been used:
+- react-toastify: UI used as notification system to the user.
+- react-tooltip: UI to add valuable information to the user.
+- react-feather: Main component wrapped in `atoms` folder in combination with the `icons` one. This is a kind of pattern I use to follow for using the most popular icons on the market, but also been able to add our custom svg icons and still be fully customizable.
