@@ -78,7 +78,7 @@ export default function CreatePatient({ patient, onClose, savePatient }: ICreate
 
   const isFormValid = !!formValues.name && !!formValues.website && !!formValues.description;
   return (
-    <div className="flex w-full p-2 max-w-xs">
+    <div className="flex p-2 w-full">
       <div className="flex flex-col w-full bg-gray-50 shadow-md rounded p-4 mb-4">
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Name</label>
@@ -123,7 +123,7 @@ export default function CreatePatient({ patient, onClose, savePatient }: ICreate
             rows={5}
             className="shadow border rounded w-full py-2 px-3 text-gray-700 mb-3 focus:outline-none focus:shadow-primary"
             name="description"
-            placeholder="Maxime tenetur eius perspiciatis minus et. Dolores rem exercitationem iure accusamus animi esse deleniti officia."
+            placeholder="Maxime tenetur eius perspiciatis minus et. Dolores rem exercitationem iure accusamus."
             value={formValues.description}
             required
             onChange={handleFormChange}

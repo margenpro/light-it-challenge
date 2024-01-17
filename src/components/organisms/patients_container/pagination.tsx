@@ -45,7 +45,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: IP
             variant="secondary"
             size="xs"
             onClick={() => onPageChange(page)}
-            className={page === currentPage ? "bg-gray-dfe3e9" : ""}
+            className={page === currentPage ? "bg-gray-c6cdd7" : ""}
           >
             {page + 1}
           </Button>
@@ -58,7 +58,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: IP
               variant="secondary"
               size="xs"
               onClick={() => onPageChange(page)}
-              className={page === currentPage ? "bg-gray-dfe3e9" : ""}
+              className={page === currentPage ? "bg-gray-c6cdd7" : ""}
             >
               {page + 1}
             </Button>
