@@ -4,6 +4,7 @@ import Avatar from "../../atoms/avatar";
 import { FeatherIcon } from "../../atoms/feather_icon";
 import FieldValue from "../../atoms/field_value";
 import { Tooltip } from "react-tooltip";
+import moment from "moment";
 
 interface IPatientCardProps {
   patient: TPatientType;
@@ -25,6 +26,7 @@ export default function PatientCard({ patient, expanded = false, setSelectedPati
     whiteSpace: "nowrap",
     width: isExpanded ? "100%" : "170px",
   };
+  const createdDate = moment(new Date(patient.createdAt)).format("MMM DD, YYYY")
   return (
     <div
       className={`flex flex-col self-start bg-slate-100 border border-gray-400 rounded-8 px-3 pt-2 shadow-md gap-4 overflow-hidden ${
@@ -43,7 +45,7 @@ export default function PatientCard({ patient, expanded = false, setSelectedPati
         </div>
       </div>
       <div>
-        <FieldValue fieldName="Created" displayValue={patient.createdAt} />
+        <FieldValue fieldName="Created" displayValue={createdDate} />
       </div>
       <div>
         <FieldValue fieldName="Website">

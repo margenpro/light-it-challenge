@@ -7,7 +7,6 @@ import LoadingSpinner from "./atoms/loading_spinner";
 import { usePatientData } from "../hooks/usePatientData";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FeatherIcon } from "./atoms/feather_icon";
 
 export default function MainContainer() {
   const [patientsData, setPatientsData] = useState<TPatientType[]>([]);
