@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                dir("light-it-challenge") {
+                    sh "npm install"
+                    sh "npm run build"
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+              echo "🚀 Deployment starting..."
+              echo "✅ Deployment completed!"
+            }
+        }
+    }
+}
